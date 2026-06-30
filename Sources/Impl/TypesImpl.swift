@@ -83,6 +83,8 @@ class VerticalEdgeImpl<PinView: Layoutable>: VerticalEdge {
         case top
         case vCenter
         case bottom
+        case firstBaseline
+        case lastBaseline
     }
     
     internal let view: PinView
@@ -94,8 +96,17 @@ class VerticalEdgeImpl<PinView: Layoutable>: VerticalEdge {
         switch type {
         case .top:     return rect.origin.y
         case .vCenter: return rect.midY
-        case .bottom:  return rect
-            .maxY
+        case .bottom:  return rect.maxY
+        case .firstBaseline:
+            guard let v = view as? PinBaselineable else {
+                return rect.midY
+            }
+            return rect.origin.y + v.pinFirstBaselineFromTop
+        case .lastBaseline:
+            guard let v = view as? PinBaselineable else {
+                return rect.midY
+            }
+            return rect.origin.y + v.pinLastBaselineFromTop
         }
     }
 
