@@ -35,7 +35,8 @@ public class PinLayout<PinView: Layoutable> {
     internal var _left: CGFloat?      // offset from superview's left edge
     internal var _bottom: CGFloat?    // offset from superview's top edge
     internal var _right: CGFloat?     // offset from superview's left edge
-    
+    internal var _baseline: ((_ bounds: CGRect) -> CGFloat)?  // offset from superview's top edge use baseline
+
     internal var _hCenter: CGFloat?
     internal var _vCenter: CGFloat?
     

@@ -167,7 +167,17 @@ extension PinLayout {
             _bottom = value
         }
     }
-    
+
+    internal func setBaseline(_ value: @escaping (_ bounds: CGRect) -> CGFloat, _ context: Context) {
+        if let _vCenter = _vCenter {
+            warnConflict(context, ["Vertical Center": _vCenter])
+        } else if let _baseline = _baseline {
+            warn("PinLayout Conflict: \(context()) won't be applied since it baseline has already been set to.")
+        } else {
+            _baseline = value
+        }
+    }
+
     internal func setHorizontalCenter(_ value: CGFloat, _ context: Context) {
         if let _left = _left {
             warnConflict(context, ["left": _left])
@@ -185,6 +195,8 @@ extension PinLayout {
             warnConflict(context, ["top": _top])
         } else if let _bottom = _bottom {
             warnConflict(context, ["bottom": _bottom])
+        } else if let _baseline = _baseline {
+            warnConflict(context, ["baseline": _baseline])
         } else if let _vCenter = _vCenter, _vCenter != value {
             warnPropertyAlreadySet("Vertical Center", propertyValue: _vCenter, context)
         } else {
