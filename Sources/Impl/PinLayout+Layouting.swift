@@ -130,12 +130,12 @@ extension PinLayout {
             newRect.size.width = view.getRect(keepTransform: keepTransform).width
         }
 
-        if let baselineTop = _baseline?(CGRect(origin: .zero, size: newRect.size)) {
-            newRect.origin.y = newRect.origin.y - baselineTop
-        }
-
         if !validateComputedHeight(newRect.size.height) {
             newRect.size.height = view.getRect(keepTransform: keepTransform).height
+        }
+
+        if let baselineTop = _baseline?(newRect.size) {
+            newRect.origin.y = newRect.origin.y - baselineTop
         }
 
         if Pin.autoSizingInProgress, let autoSizeCalculable = view as? AutoSizeCalculable {

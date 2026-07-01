@@ -101,12 +101,12 @@ class VerticalEdgeImpl<PinView: Layoutable>: VerticalEdge {
             guard let v = view as? PinBaselineable else {
                 return rect.midY
             }
-            return rect.origin.y + v.pinBaselineFromTop(CGRect(origin: .zero, size: rect.size), style: .first)
+            return rect.origin.y + v.pinBaselineFromTop(size: rect.size, alignment: .first)
         case .lastBaseline:
             guard let v = view as? PinBaselineable else {
                 return rect.midY
             }
-            return rect.origin.y + v.pinBaselineFromTop(CGRect(origin: .zero, size: rect.size), style: .last)
+            return rect.origin.y + v.pinBaselineFromTop(size: rect.size, alignment: .last)
         }
     }
 

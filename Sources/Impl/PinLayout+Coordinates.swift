@@ -168,7 +168,7 @@ extension PinLayout {
         }
     }
 
-    internal func setBaseline(_ value: @escaping (_ bounds: CGRect) -> CGFloat, _ context: Context) {
+    internal func setBaseline(_ value: @escaping (_ size: CGSize) -> CGFloat, _ context: Context) {
         if let _vCenter = _vCenter {
             warnConflict(context, ["Vertical Center": _vCenter])
         } else if let _baseline = _baseline {
